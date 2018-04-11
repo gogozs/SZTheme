@@ -1,0 +1,19 @@
+{
+  "name": "SZColorHex",
+  "version": "1.1.1",
+  "summary": "color hex",
+  "homepage": "https://github.com/gogozs/SZColorHex",
+  "license": "MIT",
+  "authors": {
+    "Song Zhou": "zhousong1993@gmail.com"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source": {
+    "git": "https://github.com/gogozs/SZColorHex.git",
+    "tag": "1.1.1"
+  },
+  "source_files": "SZColorHex",
+  "requires_arc": true
+}

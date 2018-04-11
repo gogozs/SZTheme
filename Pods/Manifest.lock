@@ -1,0 +1,21 @@
+PODS:
+  - SZColorHex (1.1.1)
+
+DEPENDENCIES:
+  - SZColorHex (from `https://github.com/gogozs/SZColorHex.git`)
+
+EXTERNAL SOURCES:
+  SZColorHex:
+    :git: https://github.com/gogozs/SZColorHex.git
+
+CHECKOUT OPTIONS:
+  SZColorHex:
+    :commit: bfb8e8e4138156eb4b29945f4466216bc5871e7e
+    :git: https://github.com/gogozs/SZColorHex.git
+
+SPEC CHECKSUMS:
+  SZColorHex: 43d84b034d64c7b0001aa0b96cd0d1ce1d6ae834
+
+PODFILE CHECKSUM: f36634e62d73d48d4561191609cb0c98f833d483
+
+COCOAPODS: 1.5.0

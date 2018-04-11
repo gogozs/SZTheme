@@ -1,0 +1,15 @@
+selector
+===
+1. class
+
+`.class`
+
+example:
+- `.UIButton`
+
+2. identifier
+
+`#id`
+
+example:
+- `#firstname`
