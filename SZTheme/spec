@@ -1,15 +1,90 @@
-selector
+design
 ===
-1. class
+3. selector <=> UIView subclass instance/id[:state]
+2. attribute_name <=> ivar
 
-`.class`
 
-example:
-- `.UIButton`
+selector_name:
+- class <=> .Button
+- id <=> #firstname
 
-2. identifier
+attribute_name:
+- titleColor
 
-`#id`
 
-example:
-- `#firstname`
+## generate theme
+JSON to dictionary
+
+```
+{
+    "{selector}:{state}": {
+        "{attribute_name}": "{attribute_value}"
+    }
+}
+```
+
+e.g.,
+```
+{
+    ".button:normal": {
+        "titleColor": "#F13FA5"
+    },
+    ".button.selected": {
+    	"titleColor": "#ff0000"
+    },
+    "#firstname": {
+        "backgroundColor": "#ffffff"
+    }
+}
+```
+
+```
+StyleManager:
+	- styles: [String: Style] # selector_name: Style
+	
+Style:
+	- view
+	- [Attribute]
+
+Attribute:
+	- state?
+	- attribute_name
+	- attribute_value
+
+```
+
+def generate_styles
+	json.each |key, value|
+		selector_name, state = key
+		styles[selector_name] = Style.new
+	end
+end
+
+UIView <StyleApply>:
+	- applyStyle(Style)
+
+ 
+## apply style
+1. when
+after views' creation
+
+2. what
+def apply_style
+	dfs from root_view
+		if view.selector_name in styles
+			view apply_style(styles[selector_name])
+		end
+	end
+end
+
+3. how
+- selector-a
+	state-a:attributed_name, attribute_value
+
+
+## update style
+def upadte_style
+
+end
+
+

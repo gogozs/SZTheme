@@ -64,6 +64,8 @@
     [super viewDidLoad];
     
     [self.view.btn1 addTarget:self action:@selector(changeTheme) forControlEvents:UIControlEventTouchUpInside];
+    
+    [[SZThemeManager sharedManager] changeToTheme:[SZThemeManager sharedManager].lightTheme fromView:self.view];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -76,7 +78,6 @@
     
     __unused NSString *ret = func(self.view, recursiveDesc);
     
-    [[SZThemeManager sharedManager] changeToTheme:[SZThemeManager sharedManager].lightTheme fromView:self.view];
 
 }
 
