@@ -8,14 +8,15 @@
 
 #import "SZTheme.h"
 #import <SZColorHex/SZColorHex.h>
-
-static char SELECTOR_TOKEN_CLASS = '.';
-static char SELECTOR_TOKEN_ID = '#';
+#import "SZThemeStyle.h"
+#import "SZThemeLexer.h"
 
 @interface SZTheme ()
 
+@property (nonatomic, readwrite) NSDictionary<NSString *, SZThemeStyle *> *styles;
 @property (nonatomic) NSDictionary *theme;
 
+@property (nonatomic) SZThemeLexer *lexer;
 
 @end
 
@@ -27,53 +28,29 @@ static char SELECTOR_TOKEN_ID = '#';
         NSData *themeData = [NSData dataWithContentsOfFile:file];
         _theme = [NSJSONSerialization JSONObjectWithData:themeData options:NSJSONReadingAllowFragments error:nil];
         
-        _classSelectors = @{}.mutableCopy;
-        _idSelectors = @{}.mutableCopy;
-        
-        [self _parseSelectorsWithTheme:_theme];
+        _lexer = [SZThemeLexer new];
+        [self _generateStyles];
     }
     
     return self;
 }
 
 #pragma mark - private
-- (void)_parseSelectorsWithTheme:(NSDictionary *)theme {
-    [theme enumerateKeysAndObjectsUsingBlock:^(NSString *  _Nonnull key, NSDictionary *  _Nonnull obj, BOOL * _Nonnull stop) {
-        if ([self _isClassSelectorWithSelector:key]) {
-            [self _addToClassSelectors:key value:obj];
-        } else if ([self _isIdSelectorWithSelector:key]) {
-            [self _addToIdSelectors:key value:obj];
+- (void)_generateStyles {
+    NSMutableDictionary *ret = [@{} mutableCopy];
+    [_theme enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, NSDictionary * _Nonnull obj, BOOL * _Nonnull stop) {
+        NSString *selector = [self.lexer selectorNameForKey:key];
+
+        if (!selector) {
+            return;
         }
+        
+        SZThemeStyle *style = [SZThemeStyle styleWithSelector:selector values:obj];
+        ret[selector] = style;
     }];
-}
-
-
-- (BOOL)_isClassSelectorWithSelector:(NSString *)selector {
-    if ([selector characterAtIndex:0] == SELECTOR_TOKEN_CLASS) {
-        return YES;
-    }
     
-    return NO;
-}
-
-- (BOOL)_isIdSelectorWithSelector:(NSString *)selector {
-    if ([selector characterAtIndex:0] == SELECTOR_TOKEN_ID) {
-        return YES;
-    }
+    _styles = ret;
     
-    return NO;
 }
-
-- (void)_addToClassSelectors:(NSString *)rawKey value:(NSDictionary *)value {
-    NSString *key = [rawKey substringFromIndex:1];
-    
-    _classSelectors[key] = value;
-}
-
-- (void)_addToIdSelectors:(NSString *)rawKey value:(NSDictionary *)value {
-    NSString *key = [rawKey substringFromIndex:1];
-    _idSelectors[key] = value;
-}
-
 
 @end

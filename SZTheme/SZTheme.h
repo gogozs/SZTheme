@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+@class SZThemeStyle;
 @interface SZTheme : NSObject
 
-- (instancetype)initWithFilePath:(NSString *)file;
+@property (nonatomic, readonly) NSDictionary<NSString *, SZThemeStyle *> *styles;
 
-@property (nonatomic) NSMutableDictionary *classSelectors;
-@property (nonatomic) NSMutableDictionary *idSelectors;
+- (instancetype)initWithFilePath:(NSString *)file;
 
 @end

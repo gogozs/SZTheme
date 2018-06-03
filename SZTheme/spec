@@ -1,6 +1,6 @@
 design
 ===
-3. selector <=> UIView subclass instance/id[:state]
+3. selector <=> UIView subclass instance
 2. attribute_name <=> ivar
 
 
@@ -17,20 +17,26 @@ JSON to dictionary
 
 ```
 {
-    "{selector}:{state}": {
-        "{attribute_name}": "{attribute_value}"
+    selector: {
+    	state: attribute,
+		attribute
     }
 }
+
+
+selector	: class | id
+attribute	: attribute_name: attribute_value
+state		: normal | selected | ...
+
 ```
 
 e.g.,
 ```
 {
-    ".button:normal": {
-        "titleColor": "#F13FA5"
-    },
-    ".button.selected": {
-    	"titleColor": "#ff0000"
+    ".button": {
+	    "normal": {"titleColor": "#F13FA5"},
+	    "selected": {"titleColor": "#ff0000"},
+	    "backgroundColor": "#ffffff",
     },
     "#firstname": {
         "backgroundColor": "#ffffff"
@@ -39,11 +45,13 @@ e.g.,
 ```
 
 ```
-StyleManager:
+ThemeManager:
+	- views: [UIView]
+	
+Theme:
 	- styles: [String: Style] # selector_name: Style
 	
 Style:
-	- view
 	- [Attribute]
 
 Attribute:
@@ -55,7 +63,7 @@ Attribute:
 
 def generate_styles
 	json.each |key, value|
-		selector_name, state = key
+		selector_name = key
 		styles[selector_name] = Style.new
 	end
 end
@@ -66,16 +74,14 @@ UIView <StyleApply>:
  
 ## apply style
 1. when
-after views' creation
+after views' move to super view
 
 2. what
-def apply_style
-	dfs from root_view
-		if view.selector_name in styles
-			view apply_style(styles[selector_name])
-		end
-	end
+
+if view.selector_name in styles
+	view apply_style(styles[selector_name])
 end
+
 
 3. how
 - selector-a

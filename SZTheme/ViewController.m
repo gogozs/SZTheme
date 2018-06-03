@@ -40,7 +40,6 @@
         [_btn1 sizeToFit];
         _btn1.frame = CGRectMake(8, 60, CGRectGetWidth(_btn1.bounds), CGRectGetHeight(_btn1.bounds));
 
-//        sgc1.tintColor = [UIColor redColor];
     }
     return self;
 }
@@ -64,8 +63,6 @@
     [super viewDidLoad];
     
     [self.view.btn1 addTarget:self action:@selector(changeTheme) forControlEvents:UIControlEventTouchUpInside];
-    
-    [[SZThemeManager sharedManager] changeToTheme:[SZThemeManager sharedManager].lightTheme fromView:self.view];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -83,9 +80,9 @@
 
 - (void)changeTheme {
     if ([SZThemeManager sharedManager].currentTheme == [SZThemeManager sharedManager].lightTheme) {
-        [[SZThemeManager sharedManager] changeToTheme:[SZThemeManager sharedManager].darkTheme fromView:self.view];
+        [[SZThemeManager sharedManager] changeTheme:[SZThemeManager sharedManager].darkTheme];
     } else {
-        [[SZThemeManager sharedManager] changeToTheme:[SZThemeManager sharedManager].lightTheme fromView:self.view];
+        [[SZThemeManager sharedManager] changeTheme:[SZThemeManager sharedManager].lightTheme];
     }
 }
 

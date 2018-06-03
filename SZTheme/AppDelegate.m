@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import "UIView+SZTheme.h"
+#import "SZThemeManager.h"
 
 @interface AppDelegate ()
 
@@ -16,7 +18,8 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    [[SZThemeManager sharedManager] setup];
+    
     return YES;
 }
 

@@ -8,6 +8,16 @@
 
 #import "SZThemeManager.h"
 #import <SZColorHex/SZColorHex.h>
+#import "SZThemeLexer.h"
+#import "SZThemeApplyProtocol.h"
+
+@interface SZThemeManager ()
+
+@property (nonatomic, readwrite) NSHashTable<__kindof UIView<SZThemeStyleApply> *> *views;
+
+@property (nonatomic) SZThemeLexer *lexer;
+
+@end
 
 @implementation SZThemeManager
 
@@ -24,71 +34,72 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        _lightTheme = [[SZTheme alloc] initWithFilePath:[[NSBundle mainBundle] pathForResource:@"style" ofType:@"json"]];
-        _darkTheme = [[SZTheme alloc] initWithFilePath:[[NSBundle mainBundle] pathForResource:@"style_dark" ofType:@"json"]];
+        _views = [NSHashTable hashTableWithOptions:NSPointerFunctionsWeakMemory];
+        _lexer = [SZThemeLexer new];
     }
     return self;
 }
 
-- (void)changeToTheme:(SZTheme *)theme fromView:(UIView *)view {
-    _currentTheme = theme;
-    [self applyStyleForView:view theme:theme];
+#pragma mark - private
+- (void)_addView:(__kindof UIView *)view {
+    if (!_currentTheme) {
+        return;
+    }
+    
+    NSString *kclass = NSStringFromClass([view class]);
+    if (_currentTheme.styles[kclass]) {
+        [_views addObject:view];
+    } else if (view.sztheme_id) {
+        if (_currentTheme.styles[[_lexer selectorNameForKey:view.sztheme_id]]) {
+            [_views addObject:view];
+        }
+    }
 }
 
-#pragma mark -
-/**
- dfs for view, apply style for view
- 
- @param view the view to start dfs
- @param theme the theme to apply
- */
-- (void)applyStyleForView:(__kindof UIView *)view theme:(SZTheme *)theme {
-    for (UIView *v in view.subviews) {
-
-        NSString *classString = NSStringFromClass(v.class);
-        if (theme.classSelectors[classString]) {
-            if ([v isKindOfClass:[UIButton class]]) {
-                [self _applyStyleForButton:(UIButton *)v styles:theme.classSelectors[classString]];
-            }
-            
-            if ([v isKindOfClass:[UISegmentedControl class]]) {
-                [self _applyStyleForSegmentedControl:(UISegmentedControl *)v styles:theme.classSelectors[classString]];
-            }
-            
-        }
-        NSString *themeID = v.sztheme_id ? [v.sztheme_id substringFromIndex:1] : nil;
-        if (themeID) {
-           // default
-            [self _applyStyleForView:v styles:theme.idSelectors[themeID]];
-        }
-        
-        [self applyStyleForView:v theme:theme];
+- (NSString *)_selectorForView:(__kindof UIView *)view {
+    if (view.sztheme_id) {
+        return [_lexer selectorNameForKey:view.sztheme_id];
     }
+    
+    return NSStringFromClass([view class]);
+}
+
+- (void)_applyStyleToView:(UIView<SZThemeStyleApply> *)view {
+    
+    SZThemeStyle *style = _currentTheme.styles[[self _selectorForView:view]];
+    
+    if (!style) {
+        return;
+    }
+    
+    [view applyStyle:style];
     
 }
 
-- (void)_applyStyleForButton:(UIButton *)button styles:(NSDictionary *)styles {
-    [styles enumerateKeysAndObjectsUsingBlock:^(NSString*  _Nonnull key, NSString*  _Nonnull obj, BOOL * _Nonnull stop) {
-        if ([key isEqualToString:@"titleColor"]) {
-            [button setTitleColor:[UIColor colorFromHexString:obj] forState:UIControlStateNormal];
-        }
-    }];
+#pragma mark - API
+- (void)setup {
+    _lightTheme = [[SZTheme alloc] initWithFilePath:[[NSBundle mainBundle] pathForResource:@"style" ofType:@"json"]];
+    _darkTheme = [[SZTheme alloc] initWithFilePath:[[NSBundle mainBundle] pathForResource:@"style_dark" ofType:@"json"]];
+    
+    _currentTheme = _lightTheme;
 }
 
-- (void)_applyStyleForSegmentedControl:(UISegmentedControl*)segmentedControl styles:(NSDictionary *)styles {
-    [styles enumerateKeysAndObjectsUsingBlock:^(NSString*  _Nonnull key, NSString*  _Nonnull obj, BOOL * _Nonnull stop) {
-        if ([key isEqualToString:@"tintColor"]) {
-            segmentedControl.tintColor = [UIColor colorFromHexString:obj];
-        }
-    }];
+- (void)changeTheme:(SZTheme *)theme {
+    _currentTheme = theme;
+    
+    for (UIView<SZThemeStyleApply> *view in self.views) {
+        [self _applyStyleToView:view];
+    }
 }
 
-- (void)_applyStyleForView:(UIView *)view styles:(NSDictionary *)styles {
-    [styles enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
-        if ([key isEqualToString:@"backgroundColor"]) {
-            view.backgroundColor = [UIColor colorFromHexString:obj];
-        }
-    }];
-}
+ - (void)applyStyleToView:(UIView *)view {
+     if (![view conformsToProtocol:@protocol(SZThemeStyleApply)]) {
+         return;
+     }
+     
+     [self _addView:view];
+   
+     [self _applyStyleToView:(UIView<SZThemeStyleApply> *)view];
+ }
 
 @end

@@ -10,15 +10,21 @@
 #import "SZTheme.h"
 #import "UIView+SZTheme.h"
 
+@protocol SZThemeStyleApply;
 @interface SZThemeManager : NSObject
 
-+ (instancetype)sharedManager;
+@property (nonatomic, readonly) NSHashTable<__kindof UIView<SZThemeStyleApply> *> *views;
 
-- (void)changeToTheme:(SZTheme *)theme fromView:(UIView *)view;
++ (instancetype)sharedManager;
+- (void)setup;
+
+- (void)changeTheme:(SZTheme *)theme;
+- (void)applyStyleToView:(UIView *)view;
 
 @property (nonatomic) SZTheme *currentTheme;
 
 @property (nonatomic) SZTheme *lightTheme;
 @property (nonatomic) SZTheme *darkTheme;
+
 
 @end

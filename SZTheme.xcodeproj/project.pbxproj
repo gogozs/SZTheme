@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5828A6CF20C3BED10062A6D2 /* SZThemeAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 5828A6CE20C3BED10062A6D2 /* SZThemeAttribute.m */; };
+		5828A6D220C3C0370062A6D2 /* SZThemeStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 5828A6D120C3C0370062A6D2 /* SZThemeStyle.m */; };
+		5828A6D620C3D6FF0062A6D2 /* SZThemeParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 5828A6D520C3D6FF0062A6D2 /* SZThemeParser.m */; };
+		5828A6DC20C3D7B50062A6D2 /* SZThemeLexer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5828A6DB20C3D7B50062A6D2 /* SZThemeLexer.m */; };
+		5828A6DF20C3DDA20062A6D2 /* UIView+SZThemeStyleApply.m in Sources */ = {isa = PBXBuildFile; fileRef = 5828A6DE20C3DDA20062A6D2 /* UIView+SZThemeStyleApply.m */; };
+		5828A6E320C3DE330062A6D2 /* UISegmentedControl+SZThemeStyleApply.m in Sources */ = {isa = PBXBuildFile; fileRef = 5828A6E220C3DE330062A6D2 /* UISegmentedControl+SZThemeStyleApply.m */; };
+		5828A6E620C3DEF20062A6D2 /* UIButton+SZThemeStyleApply.m in Sources */ = {isa = PBXBuildFile; fileRef = 5828A6E520C3DEF20062A6D2 /* UIButton+SZThemeStyleApply.m */; };
 		58E13097207E2EBF004B812D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 58E13096207E2EBF004B812D /* AppDelegate.m */; };
 		58E1309A207E2EBF004B812D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58E13099207E2EBF004B812D /* ViewController.m */; };
 		58E1309D207E2EBF004B812D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 58E1309B207E2EBF004B812D /* Main.storyboard */; };
@@ -24,6 +31,21 @@
 
 /* Begin PBXFileReference section */
 		416F62718C44E7CC6C494638 /* libPods-SZTheme.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SZTheme.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5828A6CD20C3BED10062A6D2 /* SZThemeAttribute.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SZThemeAttribute.h; sourceTree = "<group>"; };
+		5828A6CE20C3BED10062A6D2 /* SZThemeAttribute.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SZThemeAttribute.m; sourceTree = "<group>"; };
+		5828A6D020C3C0370062A6D2 /* SZThemeStyle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SZThemeStyle.h; sourceTree = "<group>"; };
+		5828A6D120C3C0370062A6D2 /* SZThemeStyle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SZThemeStyle.m; sourceTree = "<group>"; };
+		5828A6D420C3D6FF0062A6D2 /* SZThemeParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SZThemeParser.h; sourceTree = "<group>"; };
+		5828A6D520C3D6FF0062A6D2 /* SZThemeParser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SZThemeParser.m; sourceTree = "<group>"; };
+		5828A6DA20C3D7B50062A6D2 /* SZThemeLexer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SZThemeLexer.h; sourceTree = "<group>"; };
+		5828A6DB20C3D7B50062A6D2 /* SZThemeLexer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SZThemeLexer.m; sourceTree = "<group>"; };
+		5828A6DD20C3DDA20062A6D2 /* UIView+SZThemeStyleApply.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+SZThemeStyleApply.h"; sourceTree = "<group>"; };
+		5828A6DE20C3DDA20062A6D2 /* UIView+SZThemeStyleApply.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+SZThemeStyleApply.m"; sourceTree = "<group>"; };
+		5828A6E020C3DDDA0062A6D2 /* SZThemeApplyProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SZThemeApplyProtocol.h; sourceTree = "<group>"; };
+		5828A6E120C3DE330062A6D2 /* UISegmentedControl+SZThemeStyleApply.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UISegmentedControl+SZThemeStyleApply.h"; sourceTree = "<group>"; };
+		5828A6E220C3DE330062A6D2 /* UISegmentedControl+SZThemeStyleApply.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UISegmentedControl+SZThemeStyleApply.m"; sourceTree = "<group>"; };
+		5828A6E420C3DEF20062A6D2 /* UIButton+SZThemeStyleApply.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIButton+SZThemeStyleApply.h"; sourceTree = "<group>"; };
+		5828A6E520C3DEF20062A6D2 /* UIButton+SZThemeStyleApply.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIButton+SZThemeStyleApply.m"; sourceTree = "<group>"; };
 		58E13092207E2EBF004B812D /* SZTheme.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SZTheme.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		58E13095207E2EBF004B812D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		58E13096207E2EBF004B812D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -99,6 +121,21 @@
 				58E130B5207E4382004B812D /* SZThemeManager.m */,
 				58E130B7207E47F2004B812D /* UIView+SZTheme.h */,
 				58E130B8207E47F3004B812D /* UIView+SZTheme.m */,
+				5828A6CD20C3BED10062A6D2 /* SZThemeAttribute.h */,
+				5828A6CE20C3BED10062A6D2 /* SZThemeAttribute.m */,
+				5828A6D020C3C0370062A6D2 /* SZThemeStyle.h */,
+				5828A6D120C3C0370062A6D2 /* SZThemeStyle.m */,
+				5828A6D420C3D6FF0062A6D2 /* SZThemeParser.h */,
+				5828A6D520C3D6FF0062A6D2 /* SZThemeParser.m */,
+				5828A6DA20C3D7B50062A6D2 /* SZThemeLexer.h */,
+				5828A6DB20C3D7B50062A6D2 /* SZThemeLexer.m */,
+				5828A6E020C3DDDA0062A6D2 /* SZThemeApplyProtocol.h */,
+				5828A6DD20C3DDA20062A6D2 /* UIView+SZThemeStyleApply.h */,
+				5828A6DE20C3DDA20062A6D2 /* UIView+SZThemeStyleApply.m */,
+				5828A6E120C3DE330062A6D2 /* UISegmentedControl+SZThemeStyleApply.h */,
+				5828A6E220C3DE330062A6D2 /* UISegmentedControl+SZThemeStyleApply.m */,
+				5828A6E420C3DEF20062A6D2 /* UIButton+SZThemeStyleApply.h */,
+				5828A6E520C3DEF20062A6D2 /* UIButton+SZThemeStyleApply.m */,
 				58E130AB207E38D0004B812D /* style.json */,
 				58E130B2207E434F004B812D /* style_dark.json */,
 				58E130B0207E3AC7004B812D /* spec */,
@@ -215,8 +252,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				58E130AF207E3950004B812D /* SZTheme.m in Sources */,
+				5828A6DC20C3D7B50062A6D2 /* SZThemeLexer.m in Sources */,
+				5828A6D620C3D6FF0062A6D2 /* SZThemeParser.m in Sources */,
+				5828A6E620C3DEF20062A6D2 /* UIButton+SZThemeStyleApply.m in Sources */,
 				58E1309A207E2EBF004B812D /* ViewController.m in Sources */,
+				5828A6D220C3C0370062A6D2 /* SZThemeStyle.m in Sources */,
 				58E130A5207E2EC1004B812D /* main.m in Sources */,
+				5828A6E320C3DE330062A6D2 /* UISegmentedControl+SZThemeStyleApply.m in Sources */,
+				5828A6DF20C3DDA20062A6D2 /* UIView+SZThemeStyleApply.m in Sources */,
+				5828A6CF20C3BED10062A6D2 /* SZThemeAttribute.m in Sources */,
 				58E130B6207E4382004B812D /* SZThemeManager.m in Sources */,
 				58E13097207E2EBF004B812D /* AppDelegate.m in Sources */,
 				58E130B9207E47F3004B812D /* UIView+SZTheme.m in Sources */,

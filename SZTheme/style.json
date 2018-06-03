@@ -1,6 +1,8 @@
 {
     ".UIButton": {
-        "titleColor": "0xF13FA5"
+        "normal": {"titleColor": "0xF13FA5"},
+        "selected": {"titleColor": "0xff0000"},
+        "backgroundColor": "0xffffff",
     },
     ".UISegmentedControl": {
         "tintColor": "0xF13FA5"
