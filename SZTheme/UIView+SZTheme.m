@@ -39,8 +39,13 @@ void swizzleMethod(Class class, SEL originalSelector, SEL swizzledSelector) {
 
 - (void)sz_willMoveToSuperview:(UIView *)newSupeview {
     [self sz_willMoveToSuperview:newSupeview];
+
+    if (newSupeview) {
+        if (self.sztheme_id) {
+            NSLog(@"%@-%@", self.sztheme_id, self);
+        }
+    }
     
-    NSLog(@"%@", self);
     [[SZThemeManager sharedManager] applyStyleToView:self];
 }
 

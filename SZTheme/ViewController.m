@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "SZThemeManager.h"
+#import "TableViewController.h"
 
 @interface SZSampleViewControllerView : UIView
 
@@ -35,10 +36,10 @@
         [self addSubview:_btn1];
         
         // layout
-        view1.frame = CGRectMake(0, 0, 400, 400);
-        sgc1.frame = CGRectMake(8, 40, 200, 20);
+        view1.frame = CGRectMake(0, 64, 400, 400);
+        sgc1.frame = CGRectMake(8, 104, 200, 20);
         [_btn1 sizeToFit];
-        _btn1.frame = CGRectMake(8, 60, CGRectGetWidth(_btn1.bounds), CGRectGetHeight(_btn1.bounds));
+        _btn1.frame = CGRectMake(8, 124, CGRectGetWidth(_btn1.bounds), CGRectGetHeight(_btn1.bounds));
 
     }
     return self;
@@ -76,6 +77,12 @@
     __unused NSString *ret = func(self.view, recursiveDesc);
     
 
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"push" style:UIBarButtonItemStylePlain target:self action:@selector(push)];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    NSLog(@"%@", [SZThemeManager sharedManager].views);
 }
 
 - (void)changeTheme {
@@ -84,8 +91,12 @@
     } else {
         [[SZThemeManager sharedManager] changeTheme:[SZThemeManager sharedManager].lightTheme];
     }
+
 }
 
+- (void)push {
+    [self.navigationController pushViewController:[TableViewController new] animated:YES];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

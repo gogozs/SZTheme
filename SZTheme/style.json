@@ -9,5 +9,8 @@
     },
     "#firstname": {
         "backgroundColor": "0xffffff"
+    },
+    "#test_cell": {
+        "backgroundColor": "0xffffff"
     }
 }

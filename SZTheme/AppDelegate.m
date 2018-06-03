@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "UIView+SZTheme.h"
+#import "ViewController.h"
 #import "SZThemeManager.h"
 
 @interface AppDelegate ()
@@ -19,6 +19,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [[SZThemeManager sharedManager] setup];
+    
+    self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[ViewController new]];
+    [self.window makeKeyAndVisible];
     
     return YES;
 }
