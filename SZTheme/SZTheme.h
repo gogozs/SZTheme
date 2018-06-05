@@ -12,6 +12,7 @@
 @interface SZTheme : NSObject
 
 @property (nonatomic, readonly) NSDictionary<NSString *, SZThemeStyle *> *styles;
+@property (nonatomic, readonly) NSString *fileName;
 
 - (instancetype)initWithFilePath:(NSString *)file;
 

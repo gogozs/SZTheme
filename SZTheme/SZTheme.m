@@ -13,6 +13,7 @@
 
 @interface SZTheme ()
 
+@property (nonatomic, readwrite, copy) NSString *fileName;
 @property (nonatomic, readwrite) NSDictionary<NSString *, SZThemeStyle *> *styles;
 @property (nonatomic) NSDictionary *theme;
 
@@ -25,6 +26,7 @@
 - (instancetype)initWithFilePath:(NSString *)file {
     self = [super init];
     if (self) {
+        _fileName = [file lastPathComponent];
         NSData *themeData = [NSData dataWithContentsOfFile:file];
         _theme = [NSJSONSerialization JSONObjectWithData:themeData options:NSJSONReadingAllowFragments error:nil];
         
@@ -33,6 +35,22 @@
     }
     
     return self;
+}
+
+- (BOOL)isEqual:(id)other
+{
+    if (other == self) {
+        return YES;
+    }
+
+    SZTheme *otherTheme = other;
+    
+    return [self.fileName isEqualToString:otherTheme.fileName];
+}
+
+- (NSUInteger)hash
+{
+    return self.fileName.hash;
 }
 
 #pragma mark - private
